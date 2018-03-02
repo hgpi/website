@@ -2,6 +2,7 @@
 
 {% block body %}
     <h1> WIP PROFIL </h1>
+
     {{ dump() }}
     <a href="{{ path('fos_user_profile_edit') }}">Modifier mon profil</a> <br/>
     <a href="{{ path('fos_user_change_password') }}">Modifier mon mot de passe</a> <br/>
@@ -44,5 +45,5 @@
             </tr>
         </tbody>
     </table>
-
+    <img src="{{ asset('uploads/img/' ~ user.image) }}" height="100px" width="250px">
 {% endblock body %}

@@ -11,7 +11,7 @@ namespace AppBundle\Form;
 
 use AppBundle\AppBundle;
 use FOS\UserBundle\Form\Type\ProfileFormType as BaseType;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\TelType;
@@ -31,7 +31,10 @@ class ProfileType extends BaseType
             ->add('adresse')
             ->add('cp')
             ->add('ville')
-            ->add('profilePictureFile')
+            ->add('image', FileType::class, array(
+                'label' => 'Photo',
+                'data_class' => null
+            ))
             ->add('profilIsPublic')
             ->add('bio')
             ->add('birthday',BirthdayType::class)

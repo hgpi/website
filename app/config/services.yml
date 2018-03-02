@@ -38,3 +38,14 @@ services:
         arguments: []
         tags:
             - { name: kernel.event_subscriber }
+
+    app.image_uploader:
+        class: AppBundle\Service\ImageUpload
+        arguments: ['%img_directory%']
+
+    app.doctrine_image_listener:
+        class: AppBundle\EventListener\ImageUploadListener
+        arguments: ['@app.image_uploader']
+        tags:
+            - { name: doctrine.event_listener, event: prePersist }
+            - { name: doctrine.event_listener, event: preUpdate }
