@@ -1,7 +1,48 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <p> show profil</p>
-    <a href="{{ path('fos_user_profile_edit') }}">Modifier mon profil</a>
-    {#{{ dump() }}#}
+    <h1> WIP PROFIL </h1>
+    {{ dump() }}
+    <a href="{{ path('fos_user_profile_edit') }}">Modifier mon profil</a> <br/>
+    <a href="{{ path('fos_user_change_password') }}">Modifier mon mot de passe</a> <br/>
+    {% if (user.cv == null) %}
+        <a href="{{ path('cv_new',{'id_user': user.id}) }}">Ajouter un CV</a>
+        {% else %}
+            <a href="{{ path('cv_edit',{'id': user.cv.id,'id_user': user.id}) }}">Modifier mon CV</a>
+    {% endif %}
+
+
+    <table class="table table-condensed">
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>Profil public</th>
+                <th>Newsletter</th>
+                <th>Adresse</th>
+                <th>CP</th>
+                <th>Ville</th>
+                <th>Tel</th>
+                <th>Date</th>
+                <th>Email</th>
+                <th>CV</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{ user.nom }}</td>
+                <td>{{ user.prenom }}</td>
+                <td>{% if (user.profilIsPublic == 1) %} OUI {% else  %}NON {% endif %}</td>
+                <td>{% if (user.newsletter == 1) %} OUI {% else  %}NON {% endif %}</td>
+                <td>{{ user.adresse }}</td>
+                <td>{{ user.cp }}</td>
+                <td>{{ user.ville }}</td>
+                <td>0{{ user.phone }}</td>
+                <td>{{ user.birthday|date("d/m/Y") }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.cv.cv }}</td>
+            </tr>
+        </tbody>
+    </table>
+
 {% endblock body %}

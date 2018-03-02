@@ -1,4 +1,10 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: glefevre
+ * Date: 02/03/2018
+ * Time: 16:07
+ */
 
 namespace AppBundle\Form;
 
@@ -7,7 +13,7 @@ use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class CvType extends AbstractType
+class PhotoType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -15,17 +21,16 @@ class CvType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('cv',FileType::class,array(
-                'label' => 'CV (.pdf)',
+            ->add('profilePictureFile',FileType::class,array(
                 'data_class' => null
             ));
     }/**
-     * {@inheritdoc}
-     */
+ * {@inheritdoc}
+ */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\Cv'
+            'data_class' => 'AppBundle\Entity\Photo'
         ));
     }
 
@@ -34,7 +39,7 @@ class CvType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'appbundle_cv';
+        return 'appbundle_photo';
     }
 
 

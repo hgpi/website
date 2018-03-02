@@ -27,6 +27,10 @@
                     {{ form_label(form.plainPassword.second) }}
                     {{ form_widget(form.plainPassword.second, { 'attr': {'class': 'form-control' } }) }}
                     {{ form_errors(form.plainPassword.second) }}
+
+                    {{ form_label(form.newsletter,'Je veux recevoir la newsletter') }}
+                    {{ form_widget(form.newsletter) }}
+                    {{ form_errors(form.newsletter) }}
                     <hr>
                     {#{{ form_rest(form) }}#}
                     <div>

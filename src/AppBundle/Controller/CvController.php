@@ -8,6 +8,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Service\FileUploader;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+
 
 
 /**
@@ -22,6 +24,8 @@ class CvController extends Controller
      *
      * @Route("/", name="cv_index")
      * @Method("GET")
+     *
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function indexAction()
     {
@@ -35,18 +39,26 @@ class CvController extends Controller
     }
 
     /**
-     * Creates a new cv entity.
+     * Create or edit cv entity.
      *
-     * @Route("/new", name="cv_new")
+     * @Route("/ajout/{id_user}", name="cv_new")
      * @Method({"GET", "POST"})
+     *
+     * @Security("has_role('ROLE_USER')")
      */
-    public function newAction(Request $request, FileUploader $fileUploader)
+    public function addAction(Request $request, $id_user)
     {
-        $cv = new Cv();
+        $user = $this->get('security.token_storage')->getToken()->getUser();
+        if($id_user != $user->getId()) {
+            return $this->redirectToRoute('homepage');
+        }
+        $cv =  new Cv();
+        $cv->setUser($user);
         $form = $this->createForm('AppBundle\Form\CvType', $cv);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $fileUploader = $this->get('app.file_uploader');
             $em = $this->getDoctrine()->getManager();
 
             $file = $cv->getCv();
@@ -57,7 +69,7 @@ class CvController extends Controller
             $em->persist($cv);
             $em->flush();
 
-            return $this->redirectToRoute('cv_show', array('id' => $cv->getId()));
+            return $this->redirectToRoute('fos_user_profile_show');
         }
 
         return $this->render('cv/new.html.twig', array(
@@ -67,37 +79,35 @@ class CvController extends Controller
     }
 
     /**
-     * Finds and displays a cv entity.
-     *
-     * @Route("/{id}", name="cv_show")
-     * @Method("GET")
-     */
-    public function showAction(Cv $cv)
-    {
-        $deleteForm = $this->createDeleteForm($cv);
-
-        return $this->render('cv/show.html.twig', array(
-            'cv' => $cv,
-            'delete_form' => $deleteForm->createView(),
-        ));
-    }
-
-    /**
      * Displays a form to edit an existing cv entity.
      *
-     * @Route("/{id}/edit", name="cv_edit")
+     * @Route("/edit/{id_user}/{id}", name="cv_edit")
      * @Method({"GET", "POST"})
      */
-    public function editAction(Request $request, Cv $cv)
+    public function editAction(Request $request, Cv $cv, $id_user)
     {
+        $user = $this->get('security.token_storage')->getToken()->getUser();
+        if($id_user != $user->getId()) {
+            return $this->redirectToRoute('homepage');
+        }
         $deleteForm = $this->createDeleteForm($cv);
         $editForm = $this->createForm('AppBundle\Form\CvType', $cv);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+            $fileUploader = $this->get('app.file_uploader');
+            $em = $this->getDoctrine()->getManager();
 
-            return $this->redirectToRoute('cv_edit', array('id' => $cv->getId()));
+            $file = $cv->getCv();
+            $fileUploader->remove($id_user);
+            $fileName = $fileUploader->upload($file);
+
+            $cv->setCv($fileName);
+
+            $em->persist($cv);
+            $em->flush();
+
+            return $this->redirectToRoute('fos_user_profile_show');
         }
 
         return $this->render('cv/edit.html.twig', array(

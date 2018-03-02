@@ -21,6 +21,27 @@ class DefaultController extends Controller
     }
 
     /**
+     * @Route("/about", name="about")
+     */
+    public function aboutAction(Request $request)
+    {
+        return $this->render('default/about.html.twig');
+    }
+
+    /**
+     * @Route("/annuaire", name="cvtheque")
+     */
+    public function cvThequeAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $users = $em->getRepository('AppBundle:User')->findAll();
+        return $this->render('default/cvtheque.html.twig',array(
+            'users' => $users
+        ));
+    }
+
+    /**
      * @Security("has_role('ROLE_ADMIN')")
      */
     public function adminAction() {

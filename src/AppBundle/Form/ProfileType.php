@@ -9,8 +9,12 @@
 namespace AppBundle\Form;
 
 
+use AppBundle\AppBundle;
 use FOS\UserBundle\Form\Type\ProfileFormType as BaseType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\Extension\Core\Type\TelType;
 
 class ProfileType extends BaseType
 {
@@ -21,7 +25,20 @@ class ProfileType extends BaseType
         $builder
             ->remove('username')
             ->add('nom')
-            ->add('prenom');
+            ->add('prenom')
+            ->remove('current_password')
+            ->add('newsletter')
+            ->add('adresse')
+            ->add('cp')
+            ->add('ville')
+            ->add('profilePictureFile')
+            ->add('profilIsPublic')
+            ->add('bio')
+            ->add('birthday',BirthdayType::class)
+            ->add('phone',TelType::class, array(
+                'label' => 'Téléphone : +33',
+            ))
+            ;
     }
 
 

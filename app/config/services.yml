@@ -2,10 +2,6 @@ parameters:
     #parameter_name: value
 
 services:
-    _defaults:
-        autowire: true
-        autoconfigure: true
-        public: false
 
     AppBundle\:
         resource: '../../src/AppBundle/*'
@@ -16,9 +12,15 @@ services:
         public: true
         tags: ['controller.service_arguments']
 
-    AppBundle\Service\FileUploader:
+    app.file_uploader:
+        class: AppBundle\Service\FileUploader
         arguments:
-            $targetDir: '%cv_directory%'
+            ['%cv_directory%', "@security.token_storage" ]
+
+    app.file_uploader:
+        class: AppBundle\Service\FileUploader
+        arguments:
+            ['%img_directory%', "@security.token_storage" ]
 
     app.form.registration:
         class: AppBundle\Form\RegistrationType
@@ -30,3 +32,9 @@ services:
         arguments: [%fos_user.model.user.class%]
         tags:
             - { name: form.type, alias: app_user_edit_profile }
+
+    app.registration_listener:
+        class: AppBundle\EventListener\RegistrationListener
+        arguments: []
+        tags:
+            - { name: kernel.event_subscriber }

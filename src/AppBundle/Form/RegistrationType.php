@@ -19,7 +19,8 @@ class RegistrationType extends AbstractType
         $builder
             ->remove('username')
             ->add('nom')
-            ->add('prenom');
+            ->add('prenom')
+            ->add('newsletter');
     }
 
     public function getParent()

@@ -23,12 +23,6 @@ class Cv
     private $id;
 
     /**
-     *
-     * @ORM\Column(name="user", type="string", unique=true)
-     */
-    private $user;
-
-    /**
      * @var string
      *
      * @ORM\Column(name="cv", type="string", length=255)
@@ -36,6 +30,12 @@ class Cv
      * @Assert\File(mimeTypes={ "application/pdf" })
      */
     private $cv;
+
+    /**
+     * @ORM\OneToOne(targetEntity="User", inversedBy="cv")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     */
+    protected $user;
 
 
     /**
@@ -46,30 +46,6 @@ class Cv
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set user
-     *
-     * @param \stdClass $user
-     *
-     * @return Cv
-     */
-    public function setUser($user)
-    {
-        $this->user = $user;
-
-        return $this;
-    }
-
-    /**
-     * Get user
-     *
-     * @return \stdClass
-     */
-    public function getUser()
-    {
-        return $this->user;
     }
 
     /**
@@ -94,5 +70,21 @@ class Cv
     public function getCv()
     {
         return $this->cv;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param mixed $user
+     */
+    public function setUser($user)
+    {
+        $this->user = $user;
     }
 }

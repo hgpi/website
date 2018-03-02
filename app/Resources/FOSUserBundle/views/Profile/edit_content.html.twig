@@ -1,1 +1,97 @@
-<h1> wip edition profil complet</h1>
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% form_theme form 'bootstrap_3_layout.html.twig' %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-11 col-md-offset-1">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Modifier mon profil</h3>
+                </div>
+                <div class="panel-body">
+                    {{ form_start(form) }}
+                    <div class="row">
+                        <div class="col-md-6">
+                            {{ form_label(form.nom) }}
+                            {{ form_widget(form.nom) }}
+                            {{ form_errors(form.nom) }}
+                        </div>
+                        <div class="col-md-6">
+                            {{ form_label(form.prenom) }}
+                            {{ form_widget(form.prenom) }}
+                            {{ form_errors(form.prenom) }}
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            {{ form_label(form.email) }}
+                            {{ form_widget(form.email) }}
+                            {{ form_errors(form.email) }}
+                        </div>
+                        <div class="col-md-4">
+                            {{ form_label(form.birthday) }}
+                            {{ form_widget(form.birthday) }}
+                            {{ form_errors(form.birthday) }}
+                        </div>
+                        <div class="col-md-4">
+                            {{ form_label(form.phone) }}
+                            {{ form_widget(form.phone) }}
+                            {{ form_errors(form.phone) }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            {{ form_label(form.adresse) }}
+                            {{ form_widget(form.adresse) }}
+                            {{ form_errors(form.adresse) }}
+                        </div>
+                        <div class="col-md-3">
+                            {{ form_label(form.cp) }}
+                            {{ form_widget(form.cp) }}
+                            {{ form_errors(form.cp) }}
+                        </div>
+                        <div class="col-md-3">
+                            {{ form_label(form.ville) }}
+                            {{ form_widget(form.ville) }}
+                            {{ form_errors(form.ville) }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            {{ form_label(form.bio) }}
+                            {{ form_widget(form.bio) }}
+                            {{ form_errors(form.bio) }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        {{ form_label(form.newsletter) }}
+                        {{ form_widget(form.newsletter) }}
+                        {{ form_errors(form.newsletter) }}
+                    </div>
+                    <div class="row">
+                        {{ form_label(form.profilIsPublic) }}
+                        {{ form_widget(form.profilIsPublic) }}
+                        {{ form_errors(form.profilIsPublic) }}
+                    </div>
+
+                    {{ form_widget(form.profilePictureFile) }}
+                    {{ form_errors(form.profilePictureFile) }}
+
+                    {{ form_rest(form) }}
+                    <div class="row">
+                        <div class="col-md-4 col-md-offset-4">
+                            <div>
+                                <input class="btn btn-lg btn-success btn-block" type="submit" value="{{ 'profile.edit.submit'|trans }}" />
+                            </div>
+                        </div>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{ form_end(form) }}
