@@ -1,0 +1,143 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <ol class="breadcrumb">
+        <li>
+            <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+            <a href="{{ path('homepage') }}">Accueil </a>
+        </li>
+        <li class="active">
+           Annuaire
+        </li>
+
+    </ol>
+
+    <h1>CV THEQUE</h1>
+
+    <div class="container">
+        {% for key,user in users %}
+            {% if (key+1) is divisible by(6) or key == 0 %}
+                <div class="row">
+             {% endif %}
+                <div class="col-sm-6 col-md-3 col-lg-2 mt-4">
+                    <div class="card">
+                        {% if user.profilIsPublic and user.image != "" %}
+                            <div class="image" style="background-image:url({{ asset('uploads/img/'~user.image.image|e ) }})"></div>
+                        {% else %}
+                            <div class="image" style="background-image:url({{ asset('img/default-avatar.png') }})"></div>
+                            {#<img class="card-img-top" src="{{ asset('img/default-avatar.png') }}" alt="">#}
+                        {% endif %}
+                        <div class="card-block">
+                            <h4 class="card-title">{{ user.nom }} {{ user.prenom }}</h4>
+                            <div class="meta">
+                                {{ user.birthday|date('d/m/Y') }}
+                            </div>
+                            <div class="card-text">
+                                {{ user.career }}
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <a type="button" class="btn btn-info btn-sm" href="{{ path('show_annuaire',{'id': user.id}) }}">Détail</a>
+                        </div>
+                    </div>
+                </div>
+            {% if (key+1) is divisible by(6)  %}
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+
+    <style>
+
+    .image {
+        background-size: cover;
+        width: 165px;
+        height: 165px;
+    }
+
+    /* Small devices (tablets, 768px and up) */
+    @media (min-width: @screen-sm-min) {
+
+    }
+
+    /* Medium devices (desktops, 992px and up) */
+    @media (min-width: @screen-md-min) {
+        .image {
+            background-size: cover;
+            width: 345px;
+            height: 345px;
+        }
+    }
+
+    /* Large devices (large desktops, 1200px and up) */
+    @media (min-width: @screen-lg-min) {
+        .image {
+            background-size: cover;
+            width: 165px;
+            height: 165px;
+        }
+    }
+
+    .card {
+        font-size: 1em;
+        overflow: hidden;
+        padding: 0;
+        border: none;
+        border-radius: .28571429rem;
+        box-shadow: 0 1px 3px 0 #d4d4d5, 0 0 0 1px #d4d4d5;
+    }
+
+    .card-block {
+        font-size: 1em;
+        position: relative;
+        margin: 0;
+        padding: 1em;
+        border: none;
+        border-top: 1px solid rgba(34, 36, 38, .1);
+        box-shadow: none;
+    }
+
+    .card-img-top {
+        display: block;
+        width: 100%;
+        height: auto;
+    }
+
+    .card-title {
+        font-size: 1.4em;
+        font-weight: 700;
+        line-height: 1em;
+    }
+
+    .card-text {
+        clear: both;
+        margin-top: .5em;
+        color: rgba(0, 0, 0, .68);
+    }
+
+    .card-footer {
+        font-size: 1em;
+        position: static;
+        top: 0;
+        left: 0;
+        max-width: 100%;
+        padding: .75em 1em;
+        color: rgba(0, 0, 0, .4);
+        border-top: 1px solid rgba(0, 0, 0, .05) !important;
+        background: #fff;
+    }
+
+    .profile-inline ~ .card-title {
+        display: inline-block;
+        margin-left: 4px;
+        vertical-align: top;
+    }
+
+    .meta {
+        font-size: 1em;
+        color: rgba(0, 0, 0, .4);
+    }
+</style>
+
+{% endblock body %}

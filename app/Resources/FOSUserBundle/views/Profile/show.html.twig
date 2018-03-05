@@ -2,13 +2,13 @@
 
 {% block body %}
     <h1> WIP PROFIL </h1>
-
+{{ dump() }}
     <a href="{{ path('fos_user_profile_edit') }}">Modifier mon profil</a> <br/>
     <a href="{{ path('fos_user_change_password') }}">Modifier mon mot de passe</a> <br/>
     {% if (user.cv == null) %}
-        <a href="{{ path('cv_new',{'id_user': user.id}) }}">Ajouter un CV</a>
+        <a href="{{ path('cv_new',{'id_user': user.id}) }}">Ajouter un CV</a><br/>
         {% else %}
-            <a href="{{ path('cv_edit',{'id': user.cv.id,'id_user': user.id}) }}">Modifier mon CV</a>
+            <a href="{{ path('cv_edit',{'id': user.cv.id,'id_user': user.id}) }}">Modifier mon CV</a><br/>
     {% endif %}
 
 
@@ -44,5 +44,29 @@
             </tr>
         </tbody>
     </table>
-    <img src="{{ asset('uploads/img/' ~ user.image) }}" height="100px" width="250px">
+    {% if (user.image == null) %}
+        <a href="{{ path('image_new',{'id_user': user.id}) }}">Modifier ma photo</a>
+    {% else %}
+        <a href="{{ path('image_edit',{'id': user.image.id,'id_user': user.id}) }}">Modifier ma photo</a>
+    {% endif %}
+
+    {% if  user.image != "" %}
+        <img class="image" src="{{ asset('uploads/img/' ~ user.image.image) }}">
+    {% else %}
+        <img class="image" src="{{ asset('img/default-avatar.png') }}">
+        {#<img class="card-img-top" src="{{ asset('img/default-avatar.png') }}" alt="">#}
+    {% endif %}
+
+
+    <style>
+        .image {
+            background-size: cover;
+            width: 300px;
+            height: 300px;
+        }
+    </style>
 {% endblock body %}
+
+{% block javascripts %}
+    <script src="{{ asset('js/profile/profile.js') }}"></script>
+{% endblock javascripts %}

@@ -66,18 +66,22 @@
                         </div>
                     </div>
                     <div class="row">
-                        {{ form_label(form.newsletter) }}
-                        {{ form_widget(form.newsletter) }}
-                        {{ form_errors(form.newsletter) }}
-                    </div>
-                    <div class="row">
+                        <div class="col-md-4">
+                            {{ form_label(form.newsletter) }}
+                            {{ form_widget(form.newsletter) }}
+                            {{ form_errors(form.newsletter) }}
+                        </div>
+                        <div class="col-md-4">
                         {{ form_label(form.profilIsPublic) }}
                         {{ form_widget(form.profilIsPublic) }}
                         {{ form_errors(form.profilIsPublic) }}
+                        </div>
+                        <div class="col-md-4">
+                            {{ form_label(form.career) }}
+                            {{ form_widget(form.career) }}
+                            {{ form_errors(form.career) }}
+                        </div>
                     </div>
-
-                    {{ form_widget(form.image) }}
-                    {{ form_errors(form.image) }}
 
                     {{ form_rest(form) }}
                     <div class="row">

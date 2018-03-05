@@ -68,7 +68,7 @@ class User extends BaseUser
     protected $prenom;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\OneToOne(targetEntity="Image", mappedBy="user")
      */
     protected $image;
 
@@ -91,6 +91,16 @@ class User extends BaseUser
      * )
      */
     protected $adresse;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     *
+     * @Assert\Length(
+     *     min=3,
+     *     max=255
+     * )
+     */
+    protected $career;
 
     /**
      * @ORM\Column(type="integer", length=255, nullable=true)
@@ -240,6 +250,22 @@ class User extends BaseUser
     public function setAdresse($adresse)
     {
         $this->adresse = $adresse;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCareer()
+    {
+        return $this->career;
+    }
+
+    /**
+     * @param mixed $career
+     */
+    public function setCareer($career)
+    {
+        $this->career = $career;
     }
 
     /**

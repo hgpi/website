@@ -1,0 +1,92 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+
+    <ol class="breadcrumb">
+        <li>
+            <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+            <a href="{{ path('homepage') }}">Accueil </a>
+        </li>
+        <li>
+            <a href="{{ path('annuaire') }}">Annuaire </a>
+        </li>
+        <li class="active">
+            {{ user.nom ~' ' ~ user.prenom }}
+        </li>
+    </ol>
+
+    {#{{ dump() }}#}
+    {#{% if user.profilIsPublic and user.image != "" %}#}
+        {#<div class="image" style="background-image:url({{ asset('uploads/img/'~user.image.image|e ) }})"></div>#}
+    {#{% else %}#}
+        {#<div class="image" style="background-image:url({{ asset('img/default-avatar.png') }})"></div>#}
+        {#<img class="card-img-top" src="{{ asset('img/default-avatar.png') }}" alt="">#}
+    {#{% endif %}#}
+    <div class="container">
+        <div class="row">
+
+            <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 col-xs-offset-0 col-sm-offset-0 col-md-offset-1 col-lg-offset-1" >
+
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">{{ user.nom ~' ' ~ user.prenom }}</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-3 col-lg-3 " align="center">
+                                <img alt="User Pic" src="{{ asset('uploads/img/'~user.image.image|e ) }}" class="img-circle img-responsive">
+                            </div>
+
+                            <div class=" col-md-9 col-lg-9 ">
+                                <table class="table table-user-information">
+                                    <tbody>
+                                        <tr>
+                                            <td>Situation actuelle:</td>
+                                            <td>{{ user.career }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>date de naissance</td>
+                                            <td>{{ user.birthday|date('d/m/Y') }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Adresse</td>
+                                            <td>{{ user.adresse }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Ville</td>
+                                            <td>{{ user.ville ~' (' ~ user.cp ~ ') ' }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Email</td>
+                                            <td><a href="mailto:info@support.com">{{ user.email }}</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Téléphone</td>
+                                            <td>0{{ user.phone }}</td>
+                                        </tr>
+                                        <td>Bio</td>
+                                        <td>
+                                            {{ user.bio }}
+                                        </td>
+
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+
+                                <a href="{{ asset('uploads/cv/'~ user.id ~ '/' ~ user.cv.cv ) }}" target="_blank"
+                                   class="btn btn-primary">Voir le CV</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <style>
+
+    </style>
+
+{% endblock body %}

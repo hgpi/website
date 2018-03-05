@@ -54,3 +54,41 @@ footer ul li{
     margin-right: 15px;
     font-size:14px;
 }
+
+/*
+******************************************************************************
+BREADCRUMB
+*******************************************************************************
+ */
+
+.breadcrumb {
+    color:#888;
+    font-size:13px;
+    text-shadow:none;
+}
+.portlet, .page-bar {
+    border-radius: 0px;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    -o-border-radius: 0px;
+    border: 1px solid #dae2ea;
+}
+
+/*.page-breadcrumb{*/
+    /*display:inline-block;float:left;padding:10px 6px;margin:0;list-style:none*/
+/*}*/
+.page-bar .page-breadcrumb>li{
+    display:inline-block
+}
+/*.ie8 .page-bar .page-breadcrumb>li{*/
+     /*margin-right:1px*/
+ /*}*/
+.page-bar .page-breadcrumb>li>a,.page-bar .page-breadcrumb>li>span{
+
+}
+/*.page-bar .page-breadcrumb>li>i{*/
+    /*color:#aaa;font-size:14px;text-shadow:none*/
+/*}*/
+/*.page-bar .page-breadcrumb>li>i[class*=icon-],.page-bar .page-breadcrumb>li>i[class^=icon-]{*/
+    /*color:#8c8c8c*/
+/*}*/

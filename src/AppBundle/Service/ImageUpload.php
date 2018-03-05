@@ -21,11 +21,17 @@ class ImageUpload
 
     public function upload(UploadedFile $file)
     {
+
         $fileName = md5(uniqid()).'.'.$file->guessExtension();
 
         $file->move($this->getTargetDir(), $fileName);
 
         return $fileName;
+    }
+
+    public function remove($file) {
+        $fileSystem = new Filesystem();
+        $fileSystem->remove(array( $this->getTargetDir().'/'.$file));
     }
 
     public function getTargetDir()
