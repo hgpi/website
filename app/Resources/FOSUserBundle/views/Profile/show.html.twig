@@ -40,7 +40,7 @@
                 <td>0{{ user.phone }}</td>
                 <td>{{ user.birthday|date("d/m/Y") }}</td>
                 <td>{{ user.email }}</td>
-                <td>{{ user.cv.cv }}</td>
+                <td>{% if (user.cv != null) %} {{ user.cv.cv }} {% else  %}/ {% endif %}</td>
             </tr>
         </tbody>
     </table>

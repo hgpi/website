@@ -2,6 +2,7 @@ easy_admin:
     site_name: 'HGP Alumni'
     design:
         menu:
+            - { label: 'Retour au site', route: 'homepage' }
             - { label: 'Contenu site' }
             - { entity: 'CalendarEvent' }
             - { entity: 'Article' }
@@ -31,7 +32,6 @@ easy_admin:
                 actions:
                     - { name: 'show' }
                 fields:
-                    - id
                     - { property: 'title', label: 'Nom' }
                     - { property: 'startDate', label: 'Début', type: 'datetime' }
                     - { property: 'endDate', label: 'Fin' }
@@ -92,3 +92,6 @@ easy_admin:
                     - { property: 'photo', label: 'Photo' }
                     - { property: 'content', label: 'Contenu' }
                     - { property: 'url', label: 'Url', type: 'url' }
+            list:
+                actions:
+                    - { name: 'show' }
