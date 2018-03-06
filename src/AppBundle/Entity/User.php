@@ -93,7 +93,7 @@ class User extends BaseUser
     protected $adresse;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      *
      * @Assert\Length(
      *     min=3,

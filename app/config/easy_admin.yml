@@ -1,0 +1,94 @@
+easy_admin:
+    site_name: 'HGP Alumni'
+    design:
+        menu:
+            - { label: 'Contenu site' }
+            - { entity: 'CalendarEvent' }
+            - { entity: 'Article' }
+            - { label: 'Utilisateurs' }
+            - { entity: 'User' }
+            - { label: 'Documents' }
+            - { entity: 'Cv' }
+#            - { entity: 'Photo' }
+#            - { entity: 'Document' }
+    formats:
+        datetime: 'd-m-Y H:i'
+    entities:
+#        - AppBundle\Entity\Cv
+#        - AppBundle\Entity\Blog
+        CalendarEvent:
+            class: AppBundle\Entity\CalendarEvent
+            label: 'Evénement'
+            form:
+                fields:
+                - { property: 'title', label: 'Nom' }
+                - { property: 'startDate', label: 'Début', type: 'datetime' }
+                - { property: 'endDate', label: 'Fin' }
+                - { property: 'url', label: 'Url', type: 'url' }
+                - { property: 'rendering', label: 'Description' }
+            list:
+                title: 'Evénement'
+                actions:
+                    - { name: 'show' }
+                fields:
+                    - id
+                    - { property: 'title', label: 'Nom' }
+                    - { property: 'startDate', label: 'Début', type: 'datetime' }
+                    - { property: 'endDate', label: 'Fin' }
+                    - { property: 'url', label: 'Url', type: 'url' }
+                    - { property: 'rendering', label: 'Description' }
+            new:
+                title: 'Créer un événement'
+            edit:
+                title: 'Editer un événement'
+        User:
+            base_path: '/uploads/img/'
+            disabled_actions: ['new','edit']
+            class: AppBundle\Entity\User
+            label: 'Utilisateur'
+            list:
+                title: 'Utilisateur'
+                actions:
+                    - { name: 'show' }
+                fields:
+                    - { property: 'nom', label: 'Nom' }
+                    - { property: 'prenom', label: 'Prénom' }
+                    - { property: 'birthday',label: 'Date', format: 'j/n/Y' }
+                    - { property: 'email', type: 'email' }
+                    - { property: 'phone', type: 'tel' }
+                    - { property: 'newsletter', label: 'newsletter', type: 'boolean' }
+                    - { property: 'profilIsPublic', label: 'profil public', type: 'boolean' }
+                    - { property: 'image.image', label: 'Image', type: 'image', base_path: '/uploads/img/' }
+            show:
+                fields:
+                    - { property: 'nom', label: 'Nom' }
+                    - { property: 'prenom', label: 'Prénom' }
+                    - { property: 'birthday',label: 'Date', format: 'j/n/Y' }
+                    - { property: 'email', type: 'email' }
+                    - { property: 'phone', type: 'tel' }
+                    - { property: 'career', label: 'Situation actuelle' }
+                    - { property: 'adresse', label: 'Adresse' }
+                    - { property: 'ville', label: 'Ville' }
+                    - { property: 'cp', label: 'Code Postal', type: 'string' }
+                    - { property: 'bio', label: 'Bio' }
+                    - { property: 'newsletter', label: 'newsletter', type: 'boolean' }
+                    - { property: 'enabled', label: 'Actif', type: 'boolean' }
+                    - { property: 'lastLogin', label: 'Dernière connexion', type: 'datetime' }
+                    - { property: 'roles', label: 'Rôle(s)' }
+                    - { property: 'profilIsPublic', label: 'profil public', type: 'boolean' }
+                    - { property: 'image.image', label: 'Image', type: 'image' }
+        Cv:
+            class: AppBundle\Entity\Cv
+            label: 'CV'
+            disabled_actions: ['new','edit']
+            list:
+                title: 'CV'
+        Article:
+            class: AppBundle\Entity\Article
+            label: 'Article'
+            form:
+                fields:
+                    - { property: 'title', label: 'Titre' }
+                    - { property: 'photo', label: 'Photo' }
+                    - { property: 'content', label: 'Contenu' }
+                    - { property: 'url', label: 'Url', type: 'url' }

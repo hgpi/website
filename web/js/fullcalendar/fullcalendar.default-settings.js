@@ -2,10 +2,11 @@ $(function () {
     $('#calendar-holder').fullCalendar({
         aspectRatio: 2,
         locale: 'fr',
+        eventStartEditable : false,
         header: {
             left: 'prev, next',
             center: 'title',
-            right: 'month, basicWeek, basicDay, list'
+            right: 'month, basicWeek'
         },
         validRange: {
             start: '2018-03-01',

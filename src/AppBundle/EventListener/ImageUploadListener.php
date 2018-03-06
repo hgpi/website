@@ -12,6 +12,8 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Doctrine\ORM\Event\PreUpdateEventArgs;
 use AppBundle\Service\ImageUpload;
+use Appbundle\Entity\CalendarEvent;
+use Appbundle\Entity\Article;
 
 class ImageUploadListener
 {
@@ -38,7 +40,9 @@ class ImageUploadListener
 
     private function uploadFile($entity)
     {
-
+        if($entity instanceof CalendarEvent || $entity instanceof Article) {
+            return;
+        }
         $file = $entity->getImage();
 
         // only upload new files

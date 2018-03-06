@@ -8,7 +8,7 @@
 
 namespace AppBundle\Entity;
 
-use AncaRebeca\FullCalendarBundle\Model\Event;
+use AppBundle\Model\Event;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -75,7 +75,7 @@ class CalendarEvent extends Event
     protected $durationEditable = true;
     /**
      * @var string
-     * @ORM\Column(type="string", length=255, name="rendering", nullable = true)
+     * @ORM\Column(type="text", length=500, name="rendering", nullable = true)
      */
     protected $rendering;
     /**
@@ -121,6 +121,280 @@ class CalendarEvent extends Event
     {
         return $this->id;
     }
+
+    /**
+     * @return string
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    /**
+     * @param string $title
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isAllDay()
+    {
+        return $this->allDay;
+    }
+
+    /**
+     * @param bool $allDay
+     */
+    public function setAllDay($allDay)
+    {
+        $this->allDay = $allDay;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getStartDate()
+    {
+        return $this->startDate;
+    }
+
+    /**
+     * @param \DateTime $startDate
+     */
+    public function setStartDate($startDate)
+    {
+        $this->startDate = $startDate;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getEndDate()
+    {
+        return $this->endDate;
+    }
+
+    /**
+     * @param \DateTime $endDate
+     */
+    public function setEndDate($endDate)
+    {
+        $this->endDate = $endDate;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUrl()
+    {
+        return $this->url;
+    }
+
+    /**
+     * @param string $url
+     */
+    public function setUrl($url)
+    {
+        $this->url = $url;
+    }
+
+    /**
+     * @return string
+     */
+    public function getClassName()
+    {
+        return $this->className;
+    }
+
+    /**
+     * @param string $className
+     */
+    public function setClassName($className)
+    {
+        $this->className = $className;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isEditable()
+    {
+        return $this->editable;
+    }
+
+    /**
+     * @param bool $editable
+     */
+    public function setEditable($editable)
+    {
+        $this->editable = $editable;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isStartEditable()
+    {
+        return $this->startEditable;
+    }
+
+    /**
+     * @param bool $startEditable
+     */
+    public function setStartEditable($startEditable)
+    {
+        $this->startEditable = $startEditable;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isDurationEditable()
+    {
+        return $this->durationEditable;
+    }
+
+    /**
+     * @param bool $durationEditable
+     */
+    public function setDurationEditable($durationEditable)
+    {
+        $this->durationEditable = $durationEditable;
+    }
+
+    /**
+     * @return string
+     */
+    public function getRendering()
+    {
+        return $this->rendering;
+    }
+
+    /**
+     * @param string $rendering
+     */
+    public function setRendering($rendering)
+    {
+        $this->rendering = $rendering;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isOverlap()
+    {
+        return $this->overlap;
+    }
+
+    /**
+     * @param bool $overlap
+     */
+    public function setOverlap($overlap)
+    {
+        $this->overlap = $overlap;
+    }
+
+    /**
+     * @return int
+     */
+    public function getConstraint()
+    {
+        return $this->constraint;
+    }
+
+    /**
+     * @param int $constraint
+     */
+    public function setConstraint($constraint)
+    {
+        $this->constraint = $constraint;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSource()
+    {
+        return $this->source;
+    }
+
+    /**
+     * @param string $source
+     */
+    public function setSource($source)
+    {
+        $this->source = $source;
+    }
+
+    /**
+     * @return string
+     */
+    public function getColor()
+    {
+        return $this->color;
+    }
+
+    /**
+     * @param string $color
+     */
+    public function setColor($color)
+    {
+        $this->color = $color;
+    }
+
+    /**
+     * @return string
+     */
+    public function getBackgroundColor()
+    {
+        return $this->backgroundColor;
+    }
+
+    /**
+     * @param string $backgroundColor
+     */
+    public function setBackgroundColor($backgroundColor)
+    {
+        $this->backgroundColor = $backgroundColor;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTextColor()
+    {
+        return $this->textColor;
+    }
+
+    /**
+     * @param string $textColor
+     */
+    public function setTextColor($textColor)
+    {
+        $this->textColor = $textColor;
+    }
+
+    /**
+     * @return array
+     */
+    public function getCustomFields()
+    {
+        return $this->customFields;
+    }
+
+    /**
+     * @param array $customFields
+     */
+    public function setCustomFields($customFields)
+    {
+        $this->customFields = $customFields;
+    }
+
+
 
 
 }
