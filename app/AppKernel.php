@@ -20,7 +20,9 @@ class AppKernel extends Kernel
             new FOS\UserBundle\FOSUserBundle(),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new EasyCorp\Bundle\EasyAdminBundle\EasyAdminBundle(),
-            new Symfony\Bundle\AsseticBundle\AsseticBundle(),];
+            new Symfony\Bundle\AsseticBundle\AsseticBundle(),
+            new AncaRebeca\FullCalendarBundle\FullCalendarBundle(),
+        ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {
             $bundles[] = new Symfony\Bundle\DebugBundle\DebugBundle();

@@ -28,6 +28,8 @@ class DefaultController extends Controller
         return $this->render('default/about.html.twig');
     }
 
+
+
     /**
      * @Security("has_role('ROLE_ADMIN')")
      */
